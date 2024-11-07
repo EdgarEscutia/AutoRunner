@@ -4,10 +4,7 @@ using System.Collections.Generic;
 
 public class HurtCollider : MonoBehaviour
 {
-    public UnityEvent onHitReceived;
-
-    Collider hitCollider;
-    Collider hurtCollider;
+    public UnityEvent<HitCollider, HurtCollider> onHitReceived;
 
     public void NotifyHit(Collider hitCollider)
     {

@@ -5,9 +5,7 @@ using System.Collections.Generic;
 
 public class HitCollider : MonoBehaviour
 {
-    UnityEvent onHitDelivered;
-    Collider hitCollider;
-    Collider hurtCollider;
+    UnityEvent<HitCollider, HurtCollider> onHitDelivered;
 
     List<string> hittableTags;
 
@@ -18,6 +16,7 @@ public class HitCollider : MonoBehaviour
             if(other.tag == hittableTags[i])
             {
 
+                //NotifyHit();
             }
         }
     }
@@ -27,12 +26,12 @@ public class HitCollider : MonoBehaviour
         {
             if (hittableTags[i] == col.collider.tag)
             {
-                                
+                //NotifyHit();            
             }
         }
     }
 
-    private void NotifyHit(Collider other)
+    public void NotifyHit(HitCollider  HitCollider)
     {
         
     }
