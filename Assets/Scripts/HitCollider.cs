@@ -13,14 +13,26 @@ public class HitCollider : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        
+        for (int i = 0; i < hittableTags.Count; i++)
+        {
+            if(other.tag == hittableTags[i])
+            {
+
+            }
+        }
     }
-    private void OnCollisionEnter(Collision collision)
+    private void OnCollisionEnter(Collision col)
     {
-        
+        for(int i = 0; i < hittableTags.Count; i++)
+        {
+            if (hittableTags[i] == col.collider.tag)
+            {
+                                
+            }
+        }
     }
 
-    private void NotifyHit(Collider hitCollider)
+    private void NotifyHit(Collider other)
     {
         
     }
