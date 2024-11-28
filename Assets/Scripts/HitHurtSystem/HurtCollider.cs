@@ -4,10 +4,10 @@ using System.Collections.Generic;
 
 public class HurtCollider : MonoBehaviour
 {
-    public UnityEvent<HitCollider, HurtCollider> onHitReceived;
+    UnityEvent<HitCollider, HurtCollider> onHitReceived;
 
-    public void NotifyHit(Collider hitCollider)
+    public void NotifyHit(HitCollider hitCollider)
     {
-        
+        onHitReceived.Invoke(hitCollider, this);
     }
 }

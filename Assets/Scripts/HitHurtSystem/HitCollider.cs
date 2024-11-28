@@ -11,29 +11,39 @@ public class HitCollider : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        for (int i = 0; i < hittableTags.Count; i++)
-        {
-            if(other.tag == hittableTags[i])
-            {
+        CheckCollider(other);
+        //for (int i = 0; i < hittableTags.Count; i++)
+        //{
+        //    if (other.tag == hittableTags[i])
+        //    {
 
-                //NotifyHit();
-            }
+        //        //NotifyHit();
+        //    }
+        //}
+    }
+
+    private void CheckCollider(Collider other)
+    {
+        if (hittableTags.Contains(other.tag))
+        {
+           HurtCollider hurtCollider = other.GetComponent<HurtCollider>();
+            if(hurtCollider)
+            {
+                hurtCollider.NotifyHit(this);
+                onHitDelivered.Invoke(this, hurtCollider);
+            }                    
         }
     }
-    private void OnCollisionEnter(Collision col)
-    {
-        for(int i = 0; i < hittableTags.Count; i++)
-        {
-            if (hittableTags[i] == col.collider.tag)
-            {
-                //NotifyHit();            
-            }
-        }
-    }
 
-    public void NotifyHit(HitCollider  HitCollider)
+    private void OnCollisionEnter(Collision collision)
     {
-        
+        CheckCollider(collision.collider);
+        //for (int i = 0; i < hittableTags.Count; i++)
+        //{
+        //    if (hittableTags[i] == col.collider.tag)
+        //    {
+        //        //NotifyHit();            
+        //    }
+        //}
     }
-
 }
