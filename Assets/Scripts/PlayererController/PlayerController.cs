@@ -1,6 +1,6 @@
 using UnityEngine;
 using DG.Tweening;
-//using UnityEngine.InputSystem;
+using UnityEngine.InputSystem;
 
 
 
@@ -13,7 +13,9 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float maxForwardVelocity = 10f;
     [SerializeField] float minForwardVelocity = 10f;
 
-    //[SerializeField] InputActionReferences punch;
+    [SerializeField] float vericalvelocityOnGrounded = -1f;
+
+    [SerializeField] InputActionReference punch;
 
     [SerializeField] HitCollider hitColliderPunch;
 
@@ -25,33 +27,40 @@ public class PlayerController : MonoBehaviour
     {
         characterController = GetComponent<CharacterController>();
     }
-    //private void OnEnable()
-    //{
-    //    punch.action.Enable();
-    //    punch.action.performed += OnPunch;
-    //}
+    private void OnEnable()
+    {
+        punch.action.Enable();
+        punch.action.performed += OnPunch;
+    }
     void Update()
     {
         if(forwardVelocity < minForwardVelocity)
         {
-            forwardVelocity += forwardAcceleration * Time.deltaTime;
-
+            forwardVelocity += forwardAcceleration * Time.deltaTime;           
+        }
+        if (forwardVelocity > maxForwardVelocity)
+        {
+            forwardVelocity = maxForwardVelocity;
         }
 
-        verticalVelocity += gravity * Time.deltaTime;
+        characterController.Move((Vector3.forward * forwardVelocity + Vector3.up * verticalVelocity)* Time.deltaTime);
+
         if(characterController.isGrounded)
         {
-            verticalVelocity = 0f;
+            verticalVelocity = vericalvelocityOnGrounded;
         }
+        verticalVelocity += gravity * Time.deltaTime;
+
     }
-    //private void OnDisable()
-    //{
-    //    punch.action.Disable();
-    //    punch.action.performed += OnPunch;
-    //}
-    //void OnPunch(InputAction.CallbackContext context)
-    //{
-    //    hitColliderPunch.gameObject.SetActive(true);
-    //    DOVirtual.DelayedCall(0.5f, () => hitColliderPunch.gameObject.SetActive(false));
-    //}
+    private void OnDisable()
+    {
+        punch.action.Disable();
+        punch.action.performed += OnPunch;
+    }
+    void OnPunch(InputAction.CallbackContext context)
+    {
+        Debug.Log("Sexo");
+        hitColliderPunch.gameObject.SetActive(true);
+        DOVirtual.DelayedCall(0.5f, () => hitColliderPunch.gameObject.SetActive(false));
+    }
 }

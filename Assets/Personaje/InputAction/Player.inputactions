@@ -1,0 +1,34 @@
+{
+    "name": "Player",
+    "maps": [
+        {
+            "name": "player",
+            "id": "a20a724b-3bbe-4160-acc2-ad7c387652a3",
+            "actions": [
+                {
+                    "name": "punch",
+                    "type": "Button",
+                    "id": "c8cd5713-bd55-4369-a92e-6e630ce50f06",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "5f2933e1-6028-4351-873a-f08d7ec26aca",
+                    "path": "<Mouse>/rightButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "punch",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}
