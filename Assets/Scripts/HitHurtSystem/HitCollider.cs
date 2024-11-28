@@ -5,9 +5,9 @@ using System.Collections.Generic;
 
 public class HitCollider : MonoBehaviour
 {
-    UnityEvent<HitCollider, HurtCollider> onHitDelivered;
+    public UnityEvent<HitCollider, HurtCollider> onHitDelivered;
 
-    List<string> hittableTags;
+    [SerializeField] List<string> hittableTags;
 
     private void OnTriggerEnter(Collider other)
     {
